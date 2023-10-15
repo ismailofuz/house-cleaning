@@ -19,8 +19,8 @@ async function bootstrap() {
     });
 
     const config = new DocumentBuilder()
-        .setTitle('Template')
-        .setDescription('Template API Documentation')
+        .setTitle('ProTest')
+        .setDescription('ProTest API Documentation')
         .addBearerAuth()
         .setVersion('1.0')
         .build();

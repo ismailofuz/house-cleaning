@@ -1,4 +1,5 @@
 import {
+    DeviceType,
     MediaFileAssociations,
     MediaFileStatus,
     MediaFileUsages,
@@ -7,20 +8,48 @@ import {
 
 export interface UserI {
     id: number;
-    full_name: string;
+    first_name: string;
+    last_name: string;
     phone: string;
+    email: string;
+    region_id: number;
+    district_id: number;
     password: string;
     birth_date: string;
     avatar: string | null;
     role: Role;
-    chat_id: string | null;
+    is_verify: boolean;
     created_at: string;
 }
 
-export interface VerificationI {
-    user_id: number;
+export interface VerificationV2I {
+    phone: string;
+    email: string;
+    first_name: string;
+    password: string;
     code: number;
-    expires_at: string;
+    attempt_count: number;
+    expiresIn: Date;
+}
+
+export interface DeviceI {
+    id?: number;
+    name: string;
+    type: DeviceType;
+    token: string;
+    device_id: string;
+    user_id: number;
+    last_logged_in?: Date;
+    is_active?: boolean;
+    created_at?: Date;
+    updated_at?: string;
+}
+
+export interface VerificationI {
+    id: string;
+    phone: string;
+    code: number;
+    expires_at: Date;
 }
 
 export interface MediaFileMetadataI {

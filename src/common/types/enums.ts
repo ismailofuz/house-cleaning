@@ -1,7 +1,13 @@
 export enum Role {
     SUPER_ADMIN = 'super_admin',
     ADMIN = 'admin',
-    CUSTOMER = 'customer',
+    USER = 'user',
+}
+
+export enum DeviceType {
+    iOS = 'ios',
+    ANDROID = 'android',
+    WINDOWS = 'windows',
 }
 
 export enum MediaFileAssociations {
