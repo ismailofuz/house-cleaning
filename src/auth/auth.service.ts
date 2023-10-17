@@ -16,7 +16,6 @@ import { UserLoginDto } from './dto/user-login.dto';
 import { ConfigService } from '@nestjs/config';
 import { ForgotPasswordDto } from './dto/forgot-password';
 import { ResetPasswordDto } from './dto/reset-password.dto';
-import { Request } from 'express';
 import { RefreshTokenDto } from './dto/refresh-token.dto';
 import { Role } from '../common/types/enums';
 import { NotRegisteredException } from '../exceptions/not-registered';
