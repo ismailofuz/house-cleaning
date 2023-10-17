@@ -13,7 +13,6 @@ import { DeviceI, UserI, VerificationI } from '../../common/types/interfaces';
 import UsersRepositoryInterface, {
     CreateUser,
     QueryAdmins,
-    QueryUsers,
 } from '../interfaces/users';
 import { ResetPasswordDto } from 'src/auth/dto/reset-password.dto';
 import { DeleteUserDto } from 'src/users/dto/update-user.dto';
@@ -259,43 +258,11 @@ export class UsersRepository implements UsersRepositoryInterface {
                 throw new NotAcceptableException('Passwords do not match');
             }
 
-            await this.knex('application_forms')
-                .where({ applicant_id: id })
-                .del()
-                .transacting(t);
-            await this.knex('certifications')
-                .where({ applicant_id: id })
-                .del()
-                .transacting(t);
-            await this.knex('customer_favourite_directions')
-                .where({ applicant_id: id })
-                .del()
-                .transacting(t);
             await this.knex('devices')
                 .where({ applicant_id: id })
                 .del()
                 .transacting(t);
             await this.knex('notifications')
-                .where({ applicant_id: id })
-                .del()
-                .transacting(t);
-            await this.knex('universities_applicants')
-                .where({ applicant_id: id })
-                .del()
-                .transacting(t);
-            await this.knex('achievements')
-                .where({ applicant_id: id })
-                .del()
-                .transacting(t);
-            await this.knex('comments')
-                .where({ applicant_id: id })
-                .del()
-                .transacting(t);
-            await this.knex('user_educations')
-                .where({ applicant_id: id })
-                .del()
-                .transacting(t);
-            await this.knex('user_requirements')
                 .where({ applicant_id: id })
                 .del()
                 .transacting(t);
@@ -309,12 +276,8 @@ export class UsersRepository implements UsersRepositoryInterface {
         }
     }
 
-    find(query: QueryUsers): Promise<UserI[]> {
-        throw new Error('Method not implemented.');
-    }
-
-    delete(id: number): Promise<UserI> {
-        throw new Error('Method not implemented.');
+    async delete(id: number): Promise<UserI> {
+        return this.users.where({ id }).del();
     }
 
     private comparePasswords(password: string, storePassword: string) {

@@ -7,7 +7,12 @@ import {
     Version,
     ParseIntPipe,
 } from '@nestjs/common';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import {
+    ApiBearerAuth,
+    ApiOperation,
+    ApiResponse,
+    ApiTags,
+} from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { Public } from './decorators/is-public.decorator';
 import { AdminLoginDto } from './dto/admin-login.dto';
@@ -36,6 +41,8 @@ export class AuthController {
      * @param register Userlar uchun ro'yxatdan o'tish version 2
      * @returns
      */
+    @ApiOperation({ summary: 'User registration' })
+    @ApiResponse({ status: 201, description: 'Successfully register' })
     @Public()
     @Post('register')
     registerv2(@Body() register: RegisterV2Dto) {
@@ -47,6 +54,8 @@ export class AuthController {
      * @param login Userlar uchun tizimga kirish
      * @returns
      */
+    @ApiOperation({ summary: 'User login' })
+    @ApiResponse({ status: 200, description: 'Successfully user login' })
     @HttpCode(200)
     @Public()
     @Post('user/login')
@@ -54,6 +63,8 @@ export class AuthController {
         return this.authService.userLogin(login);
     }
 
+    @ApiOperation({ summary: 'User verification' })
+    @ApiResponse({ status: 201, description: 'Successfully verified' })
     @HttpCode(200)
     @Public()
     @Post('verify')

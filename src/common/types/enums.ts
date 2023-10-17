@@ -10,6 +10,14 @@ export enum DeviceType {
     WINDOWS = 'windows',
 }
 
+export enum ContestType {}
+
+export enum ContestStatus {
+    PENDING = 'pending',
+    PROCESS = 'process',
+    FINISHED = 'finished',
+}
+
 export enum MediaFileAssociations {
     USER = 'users',
     BANNER = 'banners',

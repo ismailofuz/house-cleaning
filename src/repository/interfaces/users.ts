@@ -14,7 +14,7 @@ export type UpdateUser = Partial<Omit<UserI, 'id'>>;
 export default interface UsersRepositoryInterface {
     create(dto: CreateUser): Promise<UserI>;
     findById(id: number): Promise<UserI>;
-    find(query: QueryUsers): Promise<UserI[]>;
+    findUsers(query: QueryUsers): Promise<UserI[]>;
     update(id: number, dto: UpdateUser): Promise<UserI>;
     delete(id: number): Promise<UserI>;
 }
