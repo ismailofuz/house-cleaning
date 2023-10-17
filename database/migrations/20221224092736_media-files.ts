@@ -7,8 +7,8 @@ export async function up(knex: Knex): Promise<void> {
         table.integer('file_size').notNullable();
         table.string('file_mimetype', 15).notNullable();
         table.string('file_path', 100).notNullable();
-        table.string('associated_with', 10).notNullable();
-        table.string('usage', 10).notNullable();
+        table.string('associated_with', 30).notNullable();
+        table.string('usage', 30).notNullable();
         table.enum('status', ['active', 'inactive']);
         table.date('created_at').defaultTo(knex.fn.now());
     });

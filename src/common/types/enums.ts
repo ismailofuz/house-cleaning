@@ -20,14 +20,17 @@ export enum ContestStatus {
 
 export enum MediaFileAssociations {
     USER = 'users',
-    BANNER = 'banners',
-    PRODUCT = 'products',
+    QUIZ = 'quiz',
+    BADGE = 'badge',
 }
 
 export enum MediaFileUsages {
     AVATAR = 'avatar',
     BANNER = 'banner',
-    PRODUCT = 'product',
+    BOOK = 'book',
+    TEST = 'test',
+    UNIVERSITY = 'university_logo',
+    NOTIFICATIONS_ICON = 'notification_icon',
 }
 
 export enum MediaFileStatus {
