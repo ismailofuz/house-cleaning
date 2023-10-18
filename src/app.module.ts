@@ -6,6 +6,8 @@ import { SendSmsModule } from './send-sms/send-sms.module';
 import { GatewayModule } from './gateway/gateway.module';
 import { MediaFilesModule } from './media-files/media-files.module';
 import { AuthModule } from './auth/auth.module';
+import { SubjectsModule } from './subjects/subjects.module';
+import { ContestsModule } from './contests/contests.module';
 
 @Module({
     imports: [
@@ -16,6 +18,8 @@ import { AuthModule } from './auth/auth.module';
         GatewayModule,
         MediaFilesModule,
         AuthModule,
+        SubjectsModule,
+        ContestsModule,
     ],
 })
 export class AppModule {}

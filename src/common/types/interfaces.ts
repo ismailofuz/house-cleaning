@@ -1,4 +1,6 @@
 import {
+    ContestStatus,
+    ContestType,
     DeviceType,
     MediaFileAssociations,
     MediaFileStatus,
@@ -50,6 +52,49 @@ export interface VerificationI {
     phone: string;
     code: number;
     expires_at: Date;
+}
+
+export interface SubjectI {
+    id: number;
+    name_uz: string;
+    name_ru: string;
+    name_en: string;
+    photo: string;
+}
+
+export interface ContestI {
+    id: number;
+    name_uz: string;
+    name_ru: string;
+    name_en: string;
+    description_uz: string;
+    description_ru: string;
+    description_en: string;
+    powered_by: number;
+    starts_at: Date;
+    contest_type: ContestType;
+    questions_count: number;
+    code: string;
+    first_place_prize: number;
+    second_place_prize: number;
+    third_place_prize: number;
+    status: ContestStatus;
+}
+
+export interface SectionI {
+    id: number;
+    name_uz: string;
+    name_ru: string;
+    name_en: string;
+    subject_id: string;
+}
+
+export interface ThemeI {
+    id: number;
+    name_uz: string;
+    name_ru: string;
+    name_en: string;
+    section_id: string;
 }
 
 export interface MediaFileMetadataI {
