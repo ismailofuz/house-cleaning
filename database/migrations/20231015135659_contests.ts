@@ -10,7 +10,7 @@ export async function up(knex: Knex): Promise<void> {
         table.string('description_uz');
         table.string('description_ru');
         table.string('description_en');
-        table.string('powered_by').references('id').inTable('users');
+        table.integer('powered_by').references('id').inTable('users');
         table.datetime('starts_at');
         table.string('contest_type');
         table.smallint('questions_count');
