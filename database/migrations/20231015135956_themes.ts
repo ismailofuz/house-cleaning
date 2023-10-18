@@ -9,7 +9,7 @@ export async function up(knex: Knex): Promise<void> {
         table
             .integer('section_id')
             .references('id')
-            .inTable('sunject_sections');
+            .inTable('subject_sections');
         table.timestamps(true, true);
     });
 }
