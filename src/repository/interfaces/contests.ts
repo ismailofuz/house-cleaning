@@ -12,7 +12,7 @@ export type ContestQuery = {
 export default interface ContestsRepositoryI {
     create(dto: CreateContest): Promise<ContestI>;
     update(id: number, dto: UpdateContest): Promise<number>;
-    find(query: ContestQuery): Promise<ContestI[]>;
+    find(query: ContestQuery): Promise<any>;
     findOne(id: number): Promise<ContestI>;
     delete(id: number): Promise<number>;
 }

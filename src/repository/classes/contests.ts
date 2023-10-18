@@ -24,9 +24,80 @@ export class ContestsRepository implements ContestsRepositoryI {
         return this.contest.where({ id }).update({ ...dto });
     }
 
-    find(query: ContestQuery): Promise<ContestI[]> {
+    async find(query: ContestQuery): Promise<any> {
         const { q, page } = query;
-        return this.contest.offset(page.offset).limit(page.limit);
+
+        let q_uz: string;
+        let q_ru: string;
+        if (q) {
+            let q_replace = q.replace(/\s+/g, ' ').trim();
+            q_replace = q_replace.replace(/['‘’`]/g, '‘');
+            if (/[\w\s,.!?'"’‘`-]+/g.test(q_replace)) {
+                q_uz = q_replace;
+            } else if (/^[а-яА-Я ]+$/.test(q_replace)) {
+                q_ru = q_replace;
+            }
+        }
+
+        const dbQuery = this.contest
+            .select(
+                'id',
+                'name_uz',
+                'name_ru',
+                'name_en',
+                'description_uz',
+                'description_ru',
+                'description_en',
+                'powered_by',
+                'starts_at',
+                'contest_type',
+                'questions_count',
+                'code',
+                'first_place_prize',
+                'second_place_prize',
+                'third_place_prize',
+                'status',
+            )
+            .orderBy('id', 'asc')
+            .groupBy('contests.id');
+
+        const totalCount = (
+            await dbQuery.clone().groupBy('contests.id').count()
+        ).length;
+
+        if (q_uz) {
+            dbQuery.where(function () {
+                this.orWhereILike('contests.name_uz', `%${q_uz}%`);
+            });
+        }
+
+        if (q_ru) {
+            dbQuery.where(function () {
+                this.orWhereILike('contests.name_ru', `%${q_ru}%`);
+            });
+        }
+
+        const currentCount = (
+            await dbQuery.clone().groupBy('contests.id').count()
+        ).length;
+
+        if (page) {
+            dbQuery.offset(page.offset).limit(page.limit);
+        }
+
+        dbQuery.orderBy('id');
+
+        const contests = await dbQuery;
+
+        return {
+            entities: contests,
+            pageInfo: {
+                currentCount,
+                totalCount,
+                offset: page ? page.offset : null,
+                limit: page ? page.limit : null,
+            },
+        };
     }
 
     findOne(id: number): Promise<ContestI> {
