@@ -1,26 +1,30 @@
 import { Injectable } from '@nestjs/common';
 import { CreateContestDto } from './dto/create-contest.dto';
 import { UpdateContestDto } from './dto/update-contest.dto';
+import { ContestsRepository } from 'src/repository/classes/contests';
+import { ContestsQueryDto } from './dto/contests-query.dto';
 
 @Injectable()
 export class ContestsService {
+    constructor(private readonly repository: ContestsRepository) {}
+
     create(createContestDto: CreateContestDto) {
-        return 'This action adds a new contest';
+        return this.repository.create(createContestDto);
     }
 
-    findAll() {
-        return `This action returns all contests`;
+    findAll(query: ContestsQueryDto) {
+        return this.repository.find(query);
     }
 
     findOne(id: number) {
-        return `This action returns a #${id} contest`;
+        return this.repository.findOne(id);
     }
 
     update(id: number, updateContestDto: UpdateContestDto) {
-        return `This action updates a #${id} contest`;
+        return this.repository.update(id, updateContestDto);
     }
 
     remove(id: number) {
-        return `This action removes a #${id} contest`;
+        return this.repository.delete(id);
     }
 }

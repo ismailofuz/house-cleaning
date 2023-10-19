@@ -6,11 +6,13 @@ import {
     Patch,
     Param,
     Delete,
+    Query,
 } from '@nestjs/common';
 import { ContestsService } from './contests.service';
 import { CreateContestDto } from './dto/create-contest.dto';
 import { UpdateContestDto } from './dto/update-contest.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { ContestsQueryDto } from './dto/contests-query.dto';
 
 @ApiTags('Contest')
 @Controller('contests')
@@ -23,8 +25,8 @@ export class ContestsController {
     }
 
     @Get()
-    findAll() {
-        return this.contestsService.findAll();
+    findAll(@Query() query: ContestsQueryDto) {
+        return this.contestsService.findAll(query);
     }
 
     @Get(':id')

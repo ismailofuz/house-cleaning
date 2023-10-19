@@ -6,6 +6,7 @@ import {
     Patch,
     Param,
     Delete,
+    Query,
 } from '@nestjs/common';
 import { SubjectsService } from './subjects.service';
 import { CreateSubjectDto } from './dto/create-subject.dto';
@@ -13,6 +14,7 @@ import { UpdateSubjectDto } from './dto/update-subject.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { Roles } from 'src/auth/decorators/roles.decorator';
 import { Role } from 'src/common/types/enums';
+import { SubjectsQueryDto } from './dto/subjects-query.dto';
 
 @ApiTags('Subjects')
 @Controller('subjects')
@@ -26,8 +28,8 @@ export class SubjectsController {
     }
 
     @Get()
-    findAll() {
-        return this.subjectsService.findAll();
+    findAll(@Query() query: SubjectsQueryDto) {
+        return this.subjectsService.findAll(query);
     }
 
     @Get(':id')
