@@ -4,6 +4,7 @@ import { MailerModule } from '@nestjs-modules/mailer';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 import { ConfigService } from '@nestjs/config';
 import { join } from 'path';
+import { timeout } from 'rxjs';
 
 @Module({
     imports: [
@@ -17,9 +18,10 @@ import { join } from 'path';
                         user: config.get('mail.user'),
                         pass: config.get('mail.password'),
                     },
+                    timeout: 10000,
                 },
                 defaults: {
-                    from: `Mentalaba <${config.get('mail.from')}>`,
+                    from: `ProTest <${config.get('mail.from')}>`,
                 },
                 template: {
                     dir: join(__dirname, 'templates'),
