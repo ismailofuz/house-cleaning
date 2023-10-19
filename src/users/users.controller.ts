@@ -6,16 +6,31 @@ import {
     Patch,
     Param,
     Delete,
+    ParseIntPipe,
+    Query,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { QueryUsersDto } from './dto/query.dto';
 
 @ApiTags('Users')
 @Controller('users')
 export class UsersController {
     constructor(private readonly usersService: UsersService) {}
+
+    @ApiOperation({ description: 'Get Uzbekistan regions' })
+    @Get('regions')
+    getRegions() {
+        return this.usersService.getRegions();
+    }
+
+    @ApiOperation({ description: 'Get Uzbekistan districts' })
+    @Get('districts/:region_id')
+    getDistricts(@Param('region_id', ParseIntPipe) region_id: number) {
+        return this.usersService.getDistricts(region_id);
+    }
 
     @ApiOperation({ description: 'Create user' })
     @Post()
@@ -25,8 +40,8 @@ export class UsersController {
 
     @ApiOperation({ description: 'Find all users' })
     @Get()
-    findAll() {
-        return this.usersService.findAll();
+    findAll(@Query() query: QueryUsersDto) {
+        return this.usersService.findAll(query);
     }
 
     @ApiOperation({ description: 'Find one user by id' })

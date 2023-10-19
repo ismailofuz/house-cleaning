@@ -10,7 +10,7 @@ import {
     offsetDefault,
 } from 'src/common/dto/offset-pagination.dto';
 
-export class QueryCustomersDto {
+export class QueryUsersDto {
     @IsOptional()
     @IsString()
     @MinLength(2)

@@ -5,6 +5,7 @@ import {
     IsNumber,
     IsPhoneNumber,
     IsString,
+    Min,
 } from 'class-validator';
 import { Role } from 'src/common/types/enums';
 
@@ -22,6 +23,10 @@ export class CreateUserDto {
     @IsEmail()
     email: string;
 
+    @IsString()
+    @Min(8)
+    password: string;
+
     @IsEnum(Role)
     role: Role;
 
@@ -35,11 +40,15 @@ export class CreateUserDto {
     region_id: number;
 
     @IsNumber()
-    dictrict_id: number;
+    district_id: number;
 
     @IsString()
     education: string;
 
     @IsString()
     profession: string;
+
+    created_at: Date;
+
+    is_verify: boolean;
 }

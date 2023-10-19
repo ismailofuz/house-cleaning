@@ -17,11 +17,11 @@ export interface UserI {
     region_id: number;
     district_id: number;
     password: string;
-    birth_date: string;
+    birth_date: Date;
     avatar: string | null;
     role: Role;
     is_verify: boolean;
-    created_at: string;
+    created_at: Date;
 }
 
 export interface VerificationV2I {

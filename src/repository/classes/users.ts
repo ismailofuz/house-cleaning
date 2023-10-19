@@ -18,7 +18,7 @@ import { ResetPasswordDto } from 'src/auth/dto/reset-password.dto';
 import { DeleteUserDto } from 'src/users/dto/update-user.dto';
 import { randomBytes } from 'node:crypto';
 import { CreateDeviceDto } from 'src/auth/dto/create-device.dto';
-import { QueryCustomersDto } from 'src/users/dto/query.dto';
+import { QueryUsersDto } from 'src/users/dto/query.dto';
 
 @Injectable()
 export class UsersRepository implements UsersRepositoryInterface {
@@ -40,6 +40,14 @@ export class UsersRepository implements UsersRepositoryInterface {
 
     private get devices() {
         return this.knex<DeviceI>('devices');
+    }
+
+    private get region() {
+        return this.knex('regions');
+    }
+
+    private get district() {
+        return this.knex('districts');
     }
 
     async createUserDevice(user_id: number, device: CreateDeviceDto) {
@@ -127,7 +135,7 @@ export class UsersRepository implements UsersRepositoryInterface {
         return this.users.where({ id }).first();
     }
 
-    async findUsers(query: QueryCustomersDto): Promise<any> {
+    async findUsers(query: QueryUsersDto): Promise<any> {
         const { page, q, ...raw } = query;
         const unAmbiguosWhere = UnAmbiguousWhere('users', raw);
         const dbQuery = this.users
@@ -282,5 +290,13 @@ export class UsersRepository implements UsersRepositoryInterface {
 
     private comparePasswords(password: string, storePassword: string) {
         return bcrypt.compare(password, storePassword);
+    }
+
+    getRegions() {
+        return this.region;
+    }
+
+    getDistricts(region_id: number) {
+        return this.district.where({ region_id });
     }
 }
