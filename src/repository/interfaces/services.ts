@@ -3,7 +3,7 @@ import { OffsetPaginationI, ServicesI } from 'src/common/types/interfaces';
 export type CreateService = Omit<ServicesI, 'id'>;
 export type ServicesQuery = {
     q?: string;
-    page: OffsetPaginationI;
+    page?: OffsetPaginationI;
 };
 export type UpdateService = Partial<Omit<ServicesI, 'id'>>;
 

@@ -7,6 +7,7 @@ import {
     Param,
     Delete,
     Query,
+    ParseIntPipe,
 } from '@nestjs/common';
 import { CustomerOrdersService } from './customer-orders.service';
 import { CreateCustomerOrderDto } from './dto/create-customer-order.dto';
@@ -38,14 +39,14 @@ export class CustomerOrdersController {
 
     @Roles(Role.SUPER_ADMIN)
     @Get(':id')
-    findOne(@Param('id') id: number) {
+    findOne(@Param('id', ParseIntPipe) id: number) {
         return this.customerOrdersService.findOne(id);
     }
 
     @Roles(Role.SUPER_ADMIN)
     @Patch(':id')
     update(
-        @Param('id') id: number,
+        @Param('id', ParseIntPipe) id: number,
         @Body() updateCustomerOrderDto: UpdateCustomerOrderDto,
     ) {
         return this.customerOrdersService.update(id, updateCustomerOrderDto);
@@ -53,7 +54,7 @@ export class CustomerOrdersController {
 
     @Roles(Role.SUPER_ADMIN)
     @Delete(':id')
-    remove(@Param('id') id: number) {
+    remove(@Param('id', ParseIntPipe) id: number) {
         return this.customerOrdersService.remove(id);
     }
 }

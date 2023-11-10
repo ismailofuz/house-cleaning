@@ -7,15 +7,35 @@ export class CreateServiceDto {
     @IsNumber()
     category_id: number;
 
-    @ApiProperty({ name: 'Xizmat nomi' })
+    @ApiProperty({ name: "Xizmatning o'zbekcha nomi" })
     @IsString()
-    name: string;
+    name_uz: string;
+
+    @ApiProperty({ name: 'Xizmatning rucha nomi' })
+    @IsString()
+    name_ru: string;
+
+    @ApiProperty({ name: 'Xizmatning inglizcha nomi' })
+    @IsString()
+    name_en: string;
 
     @ApiProperty({
-        description: 'Xizmat haqida qisqacha tushuncha',
+        description: "Xizmat haqida qisq o'zbekcha tushuncha",
     })
     @IsString()
-    description: string;
+    description_uz: string;
+
+    @ApiProperty({
+        description: 'Xizmat haqida qisq ruscha tushuncha',
+    })
+    @IsString()
+    description_ru: string;
+
+    @ApiProperty({
+        description: 'Xizmat haqida qisqa inglizcha tushuncha',
+    })
+    @IsString()
+    description_en: string;
 
     @ApiProperty({
         name: 'Xizmat narxi',
@@ -25,7 +45,13 @@ export class CreateServiceDto {
     service_price: number;
 
     @IsEnum(ServiceUnit)
-    unit: ServiceUnit;
+    unit_uz: ServiceUnit;
+
+    @IsEnum(ServiceUnit)
+    unit_ru: ServiceUnit;
+
+    @IsEnum(ServiceUnit)
+    unit_en: ServiceUnit;
 
     @ApiProperty({
         name: 'Xizmat belgisi',

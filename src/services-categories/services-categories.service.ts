@@ -1,26 +1,30 @@
 import { Injectable } from '@nestjs/common';
 import { CreateServicesCategoryDto } from './dto/create-services-category.dto';
 import { UpdateServicesCategoryDto } from './dto/update-services-category.dto';
+import { ServiceCategoriesRepository } from 'src/repository/classes/service-categories';
+import { QueryCategoriesDto } from './dto/query-categories.dto';
 
 @Injectable()
 export class ServicesCategoriesService {
+    constructor(private readonly repository: ServiceCategoriesRepository) {}
+
     create(createServicesCategoryDto: CreateServicesCategoryDto) {
-        return 'This action adds a new servicesCategory';
+        return this.repository.create(createServicesCategoryDto);
     }
 
-    findAll() {
-        return `This action returns all servicesCategories`;
+    findAll(query: QueryCategoriesDto) {
+        return this.repository.find(query);
     }
 
     findOne(id: number) {
-        return `This action returns a #${id} servicesCategory`;
+        return this.repository.findOne(id);
     }
 
     update(id: number, updateServicesCategoryDto: UpdateServicesCategoryDto) {
-        return `This action updates a #${id} servicesCategory`;
+        return this.repository.update(id, updateServicesCategoryDto);
     }
 
     remove(id: number) {
-        return `This action removes a #${id} servicesCategory`;
+        return this.repository.remove(id);
     }
 }

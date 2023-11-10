@@ -13,18 +13,18 @@ export class CustomerOrdersService {
     }
 
     findAll(query: QueryOrderDto) {
-        return `This action returns all customerOrders`;
+        return this.repository.find(query);
     }
 
     findOne(id: number) {
-        return `This action returns a #${id} customerOrder`;
+        return this.repository.findOne(id);
     }
 
     update(id: number, updateCustomerOrderDto: UpdateCustomerOrderDto) {
-        return `This action updates a #${id} customerOrder`;
+        return this.repository.update(id, updateCustomerOrderDto);
     }
 
     remove(id: number) {
-        return `This action removes a #${id} customerOrder`;
+        return this.repository.remove(id);
     }
 }

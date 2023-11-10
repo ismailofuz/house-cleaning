@@ -6,7 +6,7 @@ import {
 export type CreateCategory = Omit<ServiceCategoriesI, 'id'>;
 export type CategoryQuery = {
     q?: string;
-    page: OffsetPaginationI;
+    page?: OffsetPaginationI;
 };
 export type UpdateCategory = Partial<Omit<ServiceCategoriesI, 'id'>>;
 

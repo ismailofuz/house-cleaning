@@ -78,9 +78,9 @@ export interface ServicesI {
 
 export interface ServiceCategoriesI {
     id: number;
-    name_uz: number;
-    name_ru: number;
-    name_en: number;
+    name_uz: string;
+    name_ru: string;
+    name_en: string;
     type: CategoryType;
     created_at?: Date;
     updated_at?: Date;
