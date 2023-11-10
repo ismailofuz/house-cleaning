@@ -6,10 +6,11 @@ export const baseUsers = [
         first_name: 'John',
         last_name: 'Doe',
         phone: '+998951254789',
-        email: 'john@gmail.com',
         password:
             '$2b$10$Cl/iQBVyGUqiJkRm5b.bBeq8.CIaoNYDxfuEEb2SkngeN8g3Ma.vu',
         role: Role.SUPER_ADMIN,
+        region_id: 2,
+        district_id: 17,
         is_verify: true,
     },
 ];
