@@ -1,5 +1,5 @@
 import { Knex } from 'knex';
-import { OrderStatus } from 'src/common/types/enums';
+import { OrderStatus } from './../../src/common/types/enums';
 
 export async function up(knex: Knex): Promise<void> {
     return knex.schema.createTable('customer_orders', (table) => {
