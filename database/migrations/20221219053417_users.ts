@@ -10,7 +10,6 @@ export async function up(knex: Knex): Promise<void> {
         table.string('password');
         table.string('role').defaultTo(Role.USER);
         table.string('avatar');
-        table.date('birth_date');
         table.integer('region_id');
         table.integer('district_id');
         table.boolean('is_verify').defaultTo(false);
