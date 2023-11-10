@@ -3,10 +3,14 @@ import { CreateServiceDto } from './dto/create-service.dto';
 import { UpdateServiceDto } from './dto/update-service.dto';
 import { ServicesRepository } from 'src/repository/classes/services';
 import { QueryServiceDto } from './dto/query-service.dto';
+import { PinoLogger } from 'nestjs-pino';
 
 @Injectable()
 export class ServicesService {
-    constructor(private readonly repository: ServicesRepository) {}
+    constructor(
+        private readonly repository: ServicesRepository,
+        private readonly logger: PinoLogger,
+    ) {}
 
     create(createServiceDto: CreateServiceDto) {
         return this.repository.create(createServiceDto);
@@ -14,6 +18,10 @@ export class ServicesService {
 
     findAll(query: QueryServiceDto) {
         return this.repository.find(query);
+    }
+
+    findCategoryServices(category_id: number) {
+        return this.repository.findCategoryServices(category_id);
     }
 
     findOne(id: number) {

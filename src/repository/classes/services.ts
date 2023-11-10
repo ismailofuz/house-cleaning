@@ -4,9 +4,13 @@ import ServicesRepositoryI, {
     CreateService,
     ServicesQuery,
 } from '../interfaces/services';
+import { PinoLogger } from 'nestjs-pino';
 
 export class ServicesRepository implements ServicesRepositoryI {
-    constructor(@InjectKnex() private readonly knex: Knex) {}
+    constructor(
+        @InjectKnex() private readonly knex: Knex,
+        private readonly logger: PinoLogger,
+    ) {}
 
     private get service() {
         return this.knex<ServicesI>('services');
@@ -23,7 +27,8 @@ export class ServicesRepository implements ServicesRepositoryI {
             return service[0];
         } catch (error) {
             t.rollback();
-            throw error;
+            this.logger.error(error);
+            return error;
         }
     }
 
@@ -81,6 +86,20 @@ export class ServicesRepository implements ServicesRepositoryI {
         };
     }
 
+    findCategoryServices(category_id: number) {
+        return this.service
+            .where({ category_id })
+            .select(
+                'name_uz',
+                'name_ru',
+                'name_en',
+                'description_uz',
+                'description_ru',
+                'description_en',
+            )
+            .orderBy('name_uz', 'asc');
+    }
+
     findOne(id: number): Promise<ServicesI> {
         return this.service.where({ id }).first();
     }
@@ -100,7 +119,8 @@ export class ServicesRepository implements ServicesRepositoryI {
             return updateService[0];
         } catch (error) {
             t.rollback();
-            throw error;
+            this.logger.error(error);
+            return error;
         }
     }
 

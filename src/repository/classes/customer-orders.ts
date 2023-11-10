@@ -4,9 +4,13 @@ import CustomerOrdersResposirotyI, {
     OrderQuery,
 } from '../interfaces/customer-orders';
 import { InjectKnex, Knex } from 'nestjs-knex';
+import { PinoLogger } from 'nestjs-pino';
 
 export class CustomerOrderRepository implements CustomerOrdersResposirotyI {
-    constructor(@InjectKnex() private readonly knex: Knex) {}
+    constructor(
+        @InjectKnex() private readonly knex: Knex,
+        private readonly logger: PinoLogger,
+    ) {}
 
     private get order() {
         return this.knex<CustomerOrderI>('customer_orders');
@@ -23,7 +27,8 @@ export class CustomerOrderRepository implements CustomerOrdersResposirotyI {
             return order[0];
         } catch (error) {
             t.rollback();
-            throw error;
+            this.logger.error(error);
+            return error;
         }
     }
 
@@ -98,7 +103,8 @@ export class CustomerOrderRepository implements CustomerOrdersResposirotyI {
             return updateOrder[0];
         } catch (error) {
             t.rollback();
-            throw error;
+            this.logger.error(error);
+            return error;
         }
     }
 

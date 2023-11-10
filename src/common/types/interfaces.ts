@@ -4,9 +4,11 @@ import {
     MediaFileAssociations,
     MediaFileStatus,
     MediaFileUsages,
+    NotificationType,
     OrderStatus,
     Role,
     ServiceUnit,
+    Status,
 } from './enums';
 
 export interface UserI {
@@ -83,6 +85,18 @@ export interface ServiceCategoriesI {
     name_en: string;
     type: CategoryType;
     created_at?: Date;
+    updated_at?: Date;
+}
+
+export interface NotificationI {
+    id?: number;
+    user_id?: number;
+    is_read?: boolean;
+    message: string;
+    type: NotificationType;
+    created_at?: Date;
+    status?: Status;
+    is_for_all: boolean;
     updated_at?: Date;
 }
 export interface VerificationI {

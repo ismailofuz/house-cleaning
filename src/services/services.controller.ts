@@ -33,6 +33,11 @@ export class ServicesController {
         return this.servicesService.findAll(query);
     }
 
+    @Get(':categoryId')
+    findCategoryServices(@Query() category: { category_id: number }) {
+        return this.servicesService.findCategoryServices(category.category_id);
+    }
+
     @Get(':id')
     findOne(@Param('id', ParseIntPipe) id: number) {
         return this.servicesService.findOne(id);

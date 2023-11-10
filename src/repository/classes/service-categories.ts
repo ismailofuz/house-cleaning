@@ -4,11 +4,15 @@ import ServiceCategoriesRepositoryI, {
     CreateCategory,
 } from '../interfaces/service-categories';
 import { InjectKnex, Knex } from 'nestjs-knex';
+import { PinoLogger } from 'nestjs-pino';
 
 export class ServiceCategoriesRepository
     implements ServiceCategoriesRepositoryI
 {
-    constructor(@InjectKnex() private readonly knex: Knex) {}
+    constructor(
+        @InjectKnex() private readonly knex: Knex,
+        private readonly logger: PinoLogger,
+    ) {}
 
     private get category() {
         return this.knex<ServiceCategoriesI>('service_categories');
@@ -25,7 +29,8 @@ export class ServiceCategoriesRepository
             return category[0];
         } catch (error) {
             t.rollback();
-            throw error;
+            this.logger.error(error);
+            return error;
         }
     }
 
@@ -102,7 +107,8 @@ export class ServiceCategoriesRepository
             return updateCategory[0];
         } catch (error) {
             t.rollback();
-            throw error;
+            this.logger.error(error);
+            return error;
         }
     }
 

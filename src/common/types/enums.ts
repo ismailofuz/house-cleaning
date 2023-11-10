@@ -31,6 +31,21 @@ export enum MediaFileAssociations {
     GALLERY = 'gallery',
 }
 
+export enum Events {
+    NEWS = 'news',
+}
+
+export enum Status {
+    ACTIVE = 'active',
+    NON_ACTIVE = 'non-active',
+    DELETED = 'deleted',
+}
+
+export enum NotificationType {
+    WEB = 'web',
+    MOBILE = 'mobile',
+}
+
 export enum MediaFileUsages {
     AVATAR = 'avatar',
     ICON = 'icon',

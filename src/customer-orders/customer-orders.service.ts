@@ -3,10 +3,14 @@ import { CreateCustomerOrderDto } from './dto/create-customer-order.dto';
 import { UpdateCustomerOrderDto } from './dto/update-customer-order.dto';
 import { QueryOrderDto } from './dto/query-order.dto';
 import { CustomerOrderRepository } from 'src/repository/classes/customer-orders';
+import { PinoLogger } from 'nestjs-pino';
 
 @Injectable()
 export class CustomerOrdersService {
-    constructor(private readonly repository: CustomerOrderRepository) {}
+    constructor(
+        private readonly repository: CustomerOrderRepository,
+        private readonly logger: PinoLogger,
+    ) {}
 
     create(createCustomerOrderDto: CreateCustomerOrderDto) {
         return this.repository.create(createCustomerOrderDto);

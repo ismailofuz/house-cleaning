@@ -1,17 +1,22 @@
 import {
     Controller,
     Get,
-    Post,
-    Body,
-    Patch,
     Param,
     Delete,
+    Query,
+    ParseIntPipe,
+    Post,
+    Body,
 } from '@nestjs/common';
 import { NotificationsService } from './notifications.service';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { Roles } from 'src/auth/decorators/roles.decorator';
+import { Role } from 'src/common/types/enums';
+import { CurrentUser } from 'src/auth/decorators/current-user';
+import { QueryNotificationDto } from './dto/query-notification.dto';
 import { CreateNotificationDto } from './dto/create-notification.dto';
-import { UpdateNotificationDto } from './dto/update-notification.dto';
-import { ApiTags } from '@nestjs/swagger';
 
+@ApiBearerAuth()
 @ApiTags('Notifications')
 @Controller('notifications')
 export class NotificationsController {
@@ -22,26 +27,31 @@ export class NotificationsController {
         return this.notificationsService.create(createNotificationDto);
     }
 
-    @Get()
-    findAll() {
-        return this.notificationsService.findAll();
-    }
-
-    @Get(':id')
-    findOne(@Param('id') id: string) {
-        return this.notificationsService.findOne(+id);
-    }
-
-    @Patch(':id')
-    update(
-        @Param('id') id: string,
-        @Body() updateNotificationDto: UpdateNotificationDto,
+    @Roles(Role.USER)
+    @Get('user')
+    findByUserId(
+        @CurrentUser('id') id: number,
+        @Query() query: QueryNotificationDto,
     ) {
-        return this.notificationsService.update(+id, updateNotificationDto);
+        query.user_id = id;
+        return this.notificationsService.findByUserId(query);
     }
+
+    @Get('unread-count')
+    findUnreadCount(@CurrentUser('id') id: number) {
+        return this.notificationsService.findUnreadCount(id);
+    }
+
+    // @Patch(':id')
+    // update(
+    //     @Param('id') id: string,
+    //     @Body() updateNotificationDto: UpdateNotificationDto,
+    // ) {
+    //     return this.notificationsService.update(+id, updateNotificationDto);
+    // }
 
     @Delete(':id')
-    remove(@Param('id') id: string) {
-        return this.notificationsService.remove(+id);
+    remove(@Param('id', ParseIntPipe) id: number) {
+        return this.notificationsService.remove(id);
     }
 }

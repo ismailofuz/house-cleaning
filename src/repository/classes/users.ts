@@ -50,6 +50,10 @@ export class UsersRepository implements UsersRepositoryInterface {
         return this.knex('districts');
     }
 
+    getUsersId() {
+        return this.users.select('id', 'first_name', 'last_name');
+    }
+
     async createUserDevice(user_id: number, device: CreateDeviceDto) {
         const old_device = await this.devices
             .where({ user_id: user_id, device_id: device.device_id })
