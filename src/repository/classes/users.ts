@@ -146,7 +146,6 @@ export class UsersRepository implements UsersRepositoryInterface {
                 'users.avatar',
                 'users.first_name',
                 'users.phone',
-                'users.email',
                 'users.role',
                 'users.created_at',
             )

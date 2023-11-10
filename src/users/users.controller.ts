@@ -46,19 +46,22 @@ export class UsersController {
 
     @ApiOperation({ description: 'Find one user by id' })
     @Get(':id')
-    findOne(@Param('id') id: string) {
-        return this.usersService.findOne(+id);
+    findOne(@Param('id', ParseIntPipe) id: number) {
+        return this.usersService.findOne(id);
     }
 
     @ApiOperation({ description: 'Update user' })
     @Patch(':id')
-    update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-        return this.usersService.update(+id, updateUserDto);
+    update(
+        @Param('id', ParseIntPipe) id: number,
+        @Body() updateUserDto: UpdateUserDto,
+    ) {
+        return this.usersService.update(id, updateUserDto);
     }
 
     @ApiOperation({ description: 'Remove user' })
     @Delete(':id')
-    remove(@Param('id') id: string) {
-        return this.usersService.remove(+id);
+    remove(@Param('id', ParseIntPipe) id: number) {
+        return this.usersService.remove(id);
     }
 }
