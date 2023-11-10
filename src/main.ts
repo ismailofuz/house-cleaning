@@ -19,8 +19,8 @@ async function bootstrap() {
     });
 
     const config = new DocumentBuilder()
-        .setTitle('ProTest')
-        .setDescription('ProTest API Documentation')
+        .setTitle('House Cleaning')
+        .setDescription('House Cleaning API Documentation')
         .addBearerAuth()
         .setVersion('1.0')
         .build();

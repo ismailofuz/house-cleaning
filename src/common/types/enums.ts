@@ -10,12 +10,18 @@ export enum DeviceType {
     WINDOWS = 'windows',
 }
 
-export enum ContestType {}
-
-export enum ContestStatus {
+export enum OrderStatus {
     PENDING = 'pending',
-    PROCESS = 'process',
-    FINISHED = 'finished',
+    CONTACTED = 'contacted',
+}
+
+export enum ServiceUnit {
+    ROOM = 'room',
+}
+
+export enum CategoryType {
+    MAIN = 'main',
+    EXTERNAL = 'external',
 }
 
 export enum MediaFileAssociations {

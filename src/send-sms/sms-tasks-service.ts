@@ -17,8 +17,8 @@ export class SmsTasksService implements OnModuleInit {
 
     async onModuleInit() {
         try {
-            await this.refreshSmsAuthToken();
-            await this.clearOldVerifications();
+            // await this.refreshSmsAuthToken();
+            // await this.clearOldVerifications();
         } catch (error) {}
     }
 

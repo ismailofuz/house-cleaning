@@ -1,11 +1,12 @@
 import {
-    ContestStatus,
-    ContestType,
+    CategoryType,
     DeviceType,
     MediaFileAssociations,
     MediaFileStatus,
     MediaFileUsages,
+    OrderStatus,
     Role,
+    ServiceUnit,
 } from './enums';
 
 export interface UserI {
@@ -17,7 +18,6 @@ export interface UserI {
     region_id: number;
     district_id: number;
     password: string;
-    birth_date: Date;
     avatar: string | null;
     role: Role;
     is_verify: boolean;
@@ -47,54 +47,49 @@ export interface DeviceI {
     updated_at?: string;
 }
 
-export interface VerificationI {
-    id: string;
+export interface CustomerOrderI {
+    id: number;
     phone: string;
-    code: number;
-    expires_at: Date;
+    name: string;
+    address: string;
+    service_id: number;
+    status?: OrderStatus;
+    created_at?: Date;
+    updated_at?: Date;
 }
 
-export interface SubjectI {
+export interface ServicesI {
     id: number;
-    name_uz: string;
-    name_ru: string;
-    name_en: string;
-    photo: string;
-}
-
-export interface ContestI {
-    id: number;
+    category_id: number;
     name_uz: string;
     name_ru: string;
     name_en: string;
     description_uz: string;
     description_ru: string;
     description_en: string;
-    powered_by: number;
-    starts_at: Date;
-    contest_type: ContestType;
-    questions_count: number;
-    code: string;
-    first_place_prize: number;
-    second_place_prize: number;
-    third_place_prize: number;
-    status: ContestStatus;
+    unit_uz: ServiceUnit;
+    unit_ru: ServiceUnit;
+    unit_en: ServiceUnit;
+    icon: string;
+    image: string;
+    created_at?: Date;
+    updated_at?: Date;
 }
 
-export interface SectionI {
+export interface ServiceCategoriesI {
     id: number;
-    name_uz: string;
-    name_ru: string;
-    name_en: string;
-    subject_id: string;
+    name_uz: number;
+    name_ru: number;
+    name_en: number;
+    type: CategoryType;
+    created_at?: Date;
+    updated_at?: Date;
 }
-
-export interface ThemeI {
-    id: number;
-    name_uz: string;
-    name_ru: string;
-    name_en: string;
-    section_id: string;
+export interface VerificationI {
+    id: string;
+    phone: string;
+    code: number;
+    expires_at: Date;
 }
 
 export interface MediaFileMetadataI {

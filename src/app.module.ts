@@ -6,8 +6,10 @@ import { SendSmsModule } from './send-sms/send-sms.module';
 import { GatewayModule } from './gateway/gateway.module';
 import { MediaFilesModule } from './media-files/media-files.module';
 import { AuthModule } from './auth/auth.module';
-import { SubjectsModule } from './subjects/subjects.module';
-import { ContestsModule } from './contests/contests.module';
+import { CustomerOrdersModule } from './customer-orders/customer-orders.module';
+import { ServicesModule } from './services/services.module';
+import { ServicesCategoriesModule } from './services-categories/services-categories.module';
+import { NotificationsModule } from './notifications/notifications.module';
 
 @Module({
     imports: [
@@ -18,8 +20,10 @@ import { ContestsModule } from './contests/contests.module';
         GatewayModule,
         MediaFilesModule,
         AuthModule,
-        SubjectsModule,
-        ContestsModule,
+        CustomerOrdersModule,
+        ServicesModule,
+        ServicesCategoriesModule,
+        NotificationsModule,
     ],
 })
 export class AppModule {}

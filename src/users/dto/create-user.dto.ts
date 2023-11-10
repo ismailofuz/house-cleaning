@@ -33,20 +33,11 @@ export class CreateUserDto {
     @IsString()
     avatar: string;
 
-    @IsDateString()
-    birth_date: Date;
-
     @IsNumber()
     region_id: number;
 
     @IsNumber()
     district_id: number;
-
-    @IsString()
-    education: string;
-
-    @IsString()
-    profession: string;
 
     created_at: Date;
 

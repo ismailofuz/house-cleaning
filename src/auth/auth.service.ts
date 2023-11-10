@@ -82,7 +82,7 @@ export class AuthService {
     }
 
     async registerV2(register: RegisterV2Dto) {
-        const { phone, email } = register;
+        const { phone } = register;
         if (phone) {
             const user = await this.repository.findByPhoneNumber(
                 register.phone,
@@ -90,12 +90,6 @@ export class AuthService {
             if (user) {
                 throw new ConflictException(`Phone already exists`);
             }
-        } else if (email) {
-            await this.repository.findByEmail(email).then((res) => {
-                if (res) {
-                    throw new ConflictException('Email already exists');
-                }
-            });
         }
         const code = Math.floor(100000 + Math.random() * 900000);
         const data = JSON.parse(await this.redis.get(phone));
@@ -116,8 +110,6 @@ export class AuthService {
         const totalExpiration = Math.floor(remainingMilliseconds / 1000);
         if (phone) {
             await this.sms.sendSmsV2(phone, code);
-        } else if (email) {
-            await this.mail.sendEmail({ email }, code);
         }
         count++;
         const userDataJson = JSON.stringify({
@@ -127,7 +119,6 @@ export class AuthService {
             code: code,
         });
         await this.redis.set(phone, userDataJson, 'EX', totalExpiration);
-        await this.redis.set(email, userDataJson, 'EX', totalExpiration);
 
         return {
             message: 'Secret code sended successfully',

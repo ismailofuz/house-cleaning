@@ -8,11 +8,6 @@ export class RegisterV2Dto {
     @IsPhoneNumber('UZ')
     phone: string;
 
-    @ApiProperty({ type: String, example: 'example@gmail.com' })
-    @IsOptional()
-    @IsEmail()
-    email: string;
-
     @ApiProperty({ type: String, example: 'qwerty123' })
     @IsString()
     password: string;
