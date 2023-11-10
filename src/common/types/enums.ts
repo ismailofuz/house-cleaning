@@ -26,16 +26,17 @@ export enum CategoryType {
 
 export enum MediaFileAssociations {
     USER = 'users',
-    QUIZ = 'quiz',
-    BADGE = 'badge',
+    QUIZ = 'categories',
+    BADGE = 'services',
+    GALLERY = 'gallery',
 }
 
 export enum MediaFileUsages {
     AVATAR = 'avatar',
-    BANNER = 'banner',
-    BOOK = 'book',
-    TEST = 'test',
-    UNIVERSITY = 'university_logo',
+    ICON = 'icon',
+    IMAGE = 'image',
+    GALLERY_PHOTO = 'gallery_photo',
+    GALLERY_VIDEO = 'gallery_video',
     NOTIFICATIONS_ICON = 'notification_icon',
 }
 
