@@ -3,7 +3,10 @@ import { Knex } from 'knex';
 export async function up(knex: Knex): Promise<void> {
     return knex.schema.createTable('sevices', (table) => {
         table.increments('id');
-        table.integer('category_id').references('id').inTable('categories');
+        table
+            .integer('category_id')
+            .references('id')
+            .inTable('service_categories');
         table.string('name_uz', 20);
         table.string('name_ru', 20);
         table.string('name_en', 20);
