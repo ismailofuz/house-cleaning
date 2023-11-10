@@ -16,6 +16,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { QueryServiceDto } from './dto/query-service.dto';
 import { Roles } from 'src/auth/decorators/roles.decorator';
 import { Role } from 'src/common/types/enums';
+import { Public } from 'src/auth/decorators/is-public.decorator';
 
 @ApiTags('Services')
 @Controller('services')
@@ -28,6 +29,7 @@ export class ServicesController {
         return this.servicesService.create(createServiceDto);
     }
 
+    @Public()
     @Get()
     findAll(@Query() query: QueryServiceDto) {
         return this.servicesService.findAll(query);

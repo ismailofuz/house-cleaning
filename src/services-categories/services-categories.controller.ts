@@ -16,6 +16,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { QueryCategoriesDto } from './dto/query-categories.dto';
 import { Roles } from 'src/auth/decorators/roles.decorator';
 import { Role } from 'src/common/types/enums';
+import { Public } from 'src/auth/decorators/is-public.decorator';
 
 @ApiTags('Categories')
 @Controller('services-categories')
@@ -30,6 +31,7 @@ export class ServicesCategoriesController {
         return this.servicesCategoriesService.create(createServicesCategoryDto);
     }
 
+    @Public()
     @Get()
     findAll(@Query() query: QueryCategoriesDto) {
         return this.servicesCategoriesService.findAll(query);
