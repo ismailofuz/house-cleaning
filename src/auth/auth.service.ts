@@ -281,8 +281,8 @@ export class AuthService {
 
     async adminLogin(login: AdminLoginDto) {
         try {
-            login.email = login.email.toLocaleLowerCase().trim();
-            const user = await this.repository.findByEmail(login.email);
+            login.phone = login.phone.trim();
+            const user = await this.repository.findByPhoneNumber(login.phone);
 
             if (user) {
                 const isMatch = await this.comparePasswords(
@@ -298,14 +298,13 @@ export class AuthService {
                 const refreshToken = await this.generateRefreshToken({
                     ...user,
                 });
-                const { first_name, last_name, phone, email, role, id } = user;
+                const { first_name, last_name, phone, role, id } = user;
                 return {
                     token,
                     refreshToken,
                     first_name,
                     last_name,
                     phone,
-                    email,
                     role,
                     event: id,
                 };
@@ -313,15 +312,15 @@ export class AuthService {
                 throw new UnauthorizedException(`Invalid credentials`);
             }
         } catch (error) {
-            this.logger.error(error, { email: login.email });
+            this.logger.error(error, { email: login.phone });
             throw error;
         }
     }
 
     async superAdminLogin(login: AdminLoginDto) {
         try {
-            login.email = login.email.toLocaleLowerCase().trim();
-            const user = await this.repository.findByEmail(login.email);
+            login.phone = login.phone.trim();
+            const user = await this.repository.findByEmail(login.phone);
             if (user) {
                 const isMatch = await this.comparePasswords(
                     login.password,
@@ -337,20 +336,19 @@ export class AuthService {
                 }
                 const token = await this.generateJwt(user);
                 const refreshToken = await this.generateRefreshToken(user);
-                const { first_name, last_name, phone, email } = user;
+                const { first_name, last_name, phone } = user;
                 return {
                     token,
                     refreshToken,
                     first_name,
                     last_name,
                     phone,
-                    email,
                 };
             } else {
                 throw new UnauthorizedException(`Invalid credentials`);
             }
         } catch (error) {
-            this.logger.error(error, { email: login.email });
+            this.logger.error(error, { email: login.phone });
             throw error;
         }
     }
