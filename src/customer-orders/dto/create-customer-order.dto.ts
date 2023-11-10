@@ -1,6 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNumber, IsPhoneNumber, IsString } from 'class-validator';
-import { OrderStatus } from 'src/common/types/enums';
 
 export class CreateCustomerOrderDto {
     @ApiProperty({ description: 'Buyurtmachining telefon nomeri' })
