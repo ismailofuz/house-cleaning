@@ -1,7 +1,7 @@
 module.exports = {
     apps: [
         {
-            name: '@protest/api',
+            name: '@house-cleaning/api',
             script: './dist/main.js',
         },
     ],
