@@ -320,7 +320,7 @@ export class AuthService {
     async superAdminLogin(login: AdminLoginDto) {
         try {
             login.phone = login.phone.trim();
-            const user = await this.repository.findByEmail(login.phone);
+            const user = await this.repository.findByPhoneNumber(login.phone);
             if (user) {
                 const isMatch = await this.comparePasswords(
                     login.password,
