@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { ArrayNotEmpty, IsEnum, IsString } from 'class-validator';
+import { ArrayNotEmpty, IsEnum, IsOptional, IsString } from 'class-validator';
 import { CategoryType } from 'src/common/types/enums';
 
 export class CreateServicesCategoryDto {
@@ -20,6 +20,7 @@ export class CreateServicesCategoryDto {
     type: CategoryType;
 
     @ApiProperty({ description: 'Kategoriya ikonkasi' })
+    @IsOptional()
     @IsString()
     icon: string;
 
