@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEnum, IsString } from 'class-validator';
+import { ArrayNotEmpty, IsEnum, IsString } from 'class-validator';
 import { CategoryType } from 'src/common/types/enums';
 
 export class CreateServicesCategoryDto {
@@ -18,4 +18,8 @@ export class CreateServicesCategoryDto {
     @ApiProperty({ description: 'Kategotiya turi' })
     @IsEnum(CategoryType)
     type: CategoryType;
+
+    @ApiProperty({ description: 'Rasmlar' })
+    @ArrayNotEmpty()
+    gallery: string[];
 }

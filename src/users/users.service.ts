@@ -24,6 +24,10 @@ export class UsersService {
         return this.userRepository.findUsers(query);
     }
 
+    myProfile(user_id: number) {
+        return this.userRepository.myProfile(user_id);
+    }
+
     findOne(id: number) {
         return this.userRepository.findById(id);
     }

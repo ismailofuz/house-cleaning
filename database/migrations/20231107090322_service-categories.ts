@@ -7,6 +7,7 @@ export async function up(knex: Knex): Promise<void> {
         table.string('name_ru', 20);
         table.string('name_en', 20);
         table.string('type');
+        table.specificType('gallery', 'varchar ARRAY');
         table.timestamps(true, true);
     });
 }

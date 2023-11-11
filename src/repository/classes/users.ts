@@ -54,6 +54,26 @@ export class UsersRepository implements UsersRepositoryInterface {
         return this.users.select('id', 'first_name', 'last_name');
     }
 
+    myProfile(user_id: number) {
+        return this.users
+            .where('users.id', user_id)
+            .leftJoin('regions', 'regions.id', 'users.region_id')
+            .leftJoin('districts', 'districts.id', 'users.district_id')
+            .select(
+                'users.id',
+                'avatar',
+                'first_name',
+                'last_name',
+                'phone',
+                'districts.name_uz as distrcict_name_uz',
+                'districts.name_ru as distrcict_name_ru',
+                'districts.name_en as distrcict_name_en',
+                'regions.name_uz as region_name_uz',
+                'regions.name_ru as region_name_ru',
+                'regions.name_en as region_name_en',
+            );
+    }
+
     async createUserDevice(user_id: number, device: CreateDeviceDto) {
         const old_device = await this.devices
             .where({ user_id: user_id, device_id: device.device_id })
@@ -238,10 +258,6 @@ export class UsersRepository implements UsersRepositoryInterface {
 
     findByPhoneNumber(phone: string): Promise<UserI> {
         return this.users.where({ phone }).first();
-    }
-
-    findByEmail(email: string): Promise<UserI> {
-        return this.users.where({ email }).first();
     }
 
     resetPassword(reset: ResetPasswordDto) {

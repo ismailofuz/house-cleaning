@@ -7,7 +7,11 @@ export async function up(knex: Knex): Promise<void> {
         table.string('phone');
         table.string('name');
         table.string('address');
-        table.integer('service_id');
+        table
+            .integer('service_id')
+            .references('id')
+            .inTable('services')
+            .onDelete('SET NULL');
         table.string('status').defaultTo(OrderStatus.PENDING);
         table.timestamps(true, true);
     });

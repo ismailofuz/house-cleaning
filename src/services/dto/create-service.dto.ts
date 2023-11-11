@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEnum, IsNumber, IsString } from 'class-validator';
+import { ArrayNotEmpty, IsEnum, IsNumber, IsString } from 'class-validator';
 import { ServiceUnit } from 'src/common/types/enums';
 
 export class CreateServiceDto {
@@ -39,9 +39,10 @@ export class CreateServiceDto {
 
     @ApiProperty({
         name: 'Xizmat narxi',
-        description: 'Xizmatning xona, hovli, butun boshliga nisbatan narxi',
+        description:
+            "Xizmatning xona, hovli, butun boshliga nisbatan narxi(so'mda)",
     })
-    @IsString()
+    @IsNumber()
     service_price: number;
 
     @IsEnum(ServiceUnit)
@@ -64,4 +65,8 @@ export class CreateServiceDto {
     @ApiProperty({ name: 'Xizmatning rasmi' })
     @IsString()
     image: string;
+
+    @ApiProperty({ description: 'Rasmlar' })
+    @ArrayNotEmpty()
+    gallery: string[];
 }

@@ -96,6 +96,9 @@ export class ServicesRepository implements ServicesRepositoryI {
                 'description_uz',
                 'description_ru',
                 'description_en',
+                'gallery',
+                'icon',
+                'image',
             )
             .orderBy('name_uz', 'asc');
     }

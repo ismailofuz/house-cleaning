@@ -18,12 +18,6 @@ export class VerificationV2Dto {
     @Length(13, 13)
     phone: string;
 
-    @ApiProperty({ type: String, example: 'example@gmail.com' })
-    @IsOptional()
-    @IsString()
-    @IsEmail()
-    email: string;
-
     @ApiProperty({ type: Number, example: 123456 })
     @IsNumber()
     code: number;

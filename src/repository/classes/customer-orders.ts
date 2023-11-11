@@ -38,11 +38,13 @@ export class CustomerOrderRepository implements CustomerOrdersResposirotyI {
         const dbQuery = this.order
             .leftJoin('services', 'services.id', 'customer_orders.service_id')
             .select(
-                'customer_orders.*',
-                'services.name_uz',
-                'services.name_ru',
-                'services.name_en',
-            );
+                'customer_orders.phone',
+                'customer_orders.name',
+                'services.name_uz as service_name_uz',
+                'services.name_ru as service_name_ru',
+                'services.name_en as service_name_en',
+            )
+            .groupBy('services.id', 'customer_orders.id');
 
         const totalCount = (
             await dbQuery.clone().groupBy('customer_orders.id').count()

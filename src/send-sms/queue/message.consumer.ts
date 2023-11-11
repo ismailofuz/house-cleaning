@@ -9,10 +9,6 @@ export class MessageConsumer {
     async readOperationJob(
         job: Job<{ phone: string; email: string; first_name: string }>,
     ) {
-        await this.sendSms.sendSms(
-            job.data.phone,
-            job.data.email,
-            job.data.first_name,
-        );
+        await this.sendSms.sendSms(job.data.phone);
     }
 }

@@ -16,6 +16,8 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Roles } from 'src/auth/decorators/roles.decorator';
 import { Role } from 'src/common/types/enums';
 import { QueryOrderDto } from './dto/query-order.dto';
+import { Public } from 'src/auth/decorators/is-public.decorator';
+import { Throttle, ThrottlerGuard } from '@nestjs/throttler';
 
 @ApiTags('Customer orders')
 @ApiBearerAuth()
@@ -25,7 +27,8 @@ export class CustomerOrdersController {
         private readonly customerOrdersService: CustomerOrdersService,
     ) {}
 
-    @Roles(Role.USER)
+    @Throttle(1, 5)
+    @Public()
     @Post()
     create(@Body() createCustomerOrderDto: CreateCustomerOrderDto) {
         return this.customerOrdersService.create(createCustomerOrderDto);

@@ -1,12 +1,13 @@
 import { Knex } from 'knex';
 
 export async function up(knex: Knex): Promise<void> {
-    return knex.schema.createTable('sevices', (table) => {
+    return knex.schema.createTable('services', (table) => {
         table.increments('id');
         table
             .integer('category_id')
             .references('id')
-            .inTable('service_categories');
+            .inTable('service_categories')
+            .onDelete('SET NULL');
         table.string('name_uz', 20);
         table.string('name_ru', 20);
         table.string('name_en', 20);
@@ -19,6 +20,7 @@ export async function up(knex: Knex): Promise<void> {
         table.string('unit_en');
         table.string('icon');
         table.string('image');
+        table.specificType('gallery', 'varchar ARRAY');
         table.timestamps(true, true);
     });
 }

@@ -16,7 +16,6 @@ export interface UserI {
     first_name: string;
     last_name: string;
     phone: string;
-    email: string;
     region_id: number;
     district_id: number;
     password: string;

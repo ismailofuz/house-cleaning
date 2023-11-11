@@ -35,12 +35,15 @@ export class ServicesController {
         return this.servicesService.findAll(query);
     }
 
+    @Public()
     @Get(':categoryId')
-    findCategoryServices(@Query() category: { category_id: number }) {
-        return this.servicesService.findCategoryServices(category.category_id);
+    findCategoryServices(
+        @Param('categoryId', ParseIntPipe) category_id: number,
+    ) {
+        return this.servicesService.findCategoryServices(category_id);
     }
 
-    @Get(':id')
+    @Get('one/:id')
     findOne(@Param('id', ParseIntPipe) id: number) {
         return this.servicesService.findOne(id);
     }

@@ -128,7 +128,7 @@ export class AuthService {
     }
 
     async verifyV2(dto: VerificationV2Dto) {
-        const { email, phone, device } = dto;
+        const { phone, device } = dto;
         let data: VerificationV2I;
         if (phone) {
             data = JSON.parse(await this.redis.get(dto.phone));
@@ -136,13 +136,6 @@ export class AuthService {
             const user = await this.repository.findByPhoneNumber(dto.phone);
             if (user) {
                 throw new ConflictException(`Phone already exists`);
-            }
-        } else if (email) {
-            data = JSON.parse(await this.redis.get(dto.phone));
-
-            const user = await this.repository.findByEmail(dto.email);
-            if (user) {
-                throw new ConflictException(`Email already exists`);
             }
         }
         const current_date = Date.now();
@@ -168,21 +161,12 @@ export class AuthService {
                             is_verify: true,
                         })
                         .returning('*');
-                } else if (dto.email) {
-                    user = await this.knex('users')
-                        .insert({
-                            email: data.email,
-                            password: password,
-                            is_verify: true,
-                        })
-                        .returning('*');
                 }
                 const token = await this.generateJwt(user[0]);
                 const refreshToken = await this.generateRefreshToken(user[0]);
                 if (device)
                     await this.repository.createUserDevice(user[0].id, device);
-                const { first_name, last_name, phone, email, avatar, id } =
-                    user[0];
+                const { first_name, last_name, phone, avatar, id } = user[0];
                 await this.redis.del(data.phone);
                 return {
                     token,
@@ -190,7 +174,6 @@ export class AuthService {
                     first_name,
                     last_name,
                     phone,
-                    email,
                     avatar,
                     event: id,
                 };
@@ -253,15 +236,13 @@ export class AuthService {
                 const refreshToken = await this.generateRefreshToken(user);
                 if (device)
                     await this.repository.createUserDevice(user.id, device);
-                const { first_name, last_name, phone, email, avatar, id } =
-                    user;
+                const { first_name, last_name, phone, avatar, id } = user;
                 return {
                     token,
                     refreshToken,
                     first_name,
                     last_name,
                     phone,
-                    email,
                     avatar,
                     event: id,
                 };
@@ -357,11 +338,7 @@ export class AuthService {
         try {
             const user = await this.repository.findByPhoneNumber(forgot.phone);
             if (user && user.role == Role.USER) {
-                const verification = await this.sms.sendSms(
-                    forgot.phone,
-                    user.email,
-                    user.first_name,
-                );
+                const verification = await this.sms.sendSms(forgot.phone);
                 return { id: verification.id };
             } else {
                 throw new UnauthorizedException(`This user not registered`);

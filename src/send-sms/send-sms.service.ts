@@ -91,7 +91,7 @@ export class SendSmsService {
         }
     }
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    async sendSms(phone: string, email: string, first_name: string) {
+    async sendSms(phone: string) {
         const code = Math.floor(100000 + Math.random() * 900000);
         const sms = await this.knex<VerificationI>('verifications')
             .insert({
@@ -100,9 +100,7 @@ export class SendSmsService {
                 expires_at: new Date(Date.now() + 300000),
             })
             .returning('*');
-        // if (email) {
-        //     await this.signUpMailer(email, code, first_name);
-        // }
+
         let token = await this.redis.get('smsToken');
 
         if (!token) {
