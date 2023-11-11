@@ -6,7 +6,6 @@ import {
     IsNumber,
     Length,
     IsOptional,
-    IsEmail,
 } from 'class-validator';
 import { CreateDeviceDto } from './create-device.dto';
 

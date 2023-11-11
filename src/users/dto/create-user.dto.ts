@@ -1,5 +1,4 @@
 import {
-    IsEmail,
     IsEnum,
     IsNumber,
     IsPhoneNumber,

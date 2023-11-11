@@ -17,7 +17,7 @@ import { Roles } from 'src/auth/decorators/roles.decorator';
 import { Role } from 'src/common/types/enums';
 import { QueryOrderDto } from './dto/query-order.dto';
 import { Public } from 'src/auth/decorators/is-public.decorator';
-import { Throttle, ThrottlerGuard } from '@nestjs/throttler';
+import { Throttle } from '@nestjs/throttler';
 
 @ApiTags('Customer orders')
 @ApiBearerAuth()
