@@ -19,6 +19,10 @@ export class CreateServicesCategoryDto {
     @IsEnum(CategoryType)
     type: CategoryType;
 
+    @ApiProperty({ description: 'Kategoriya ikonkasi' })
+    @IsString()
+    icon: string;
+
     @ApiProperty({ description: 'Rasmlar' })
     @ArrayNotEmpty()
     gallery: string[];

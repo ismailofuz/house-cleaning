@@ -83,6 +83,7 @@ export interface ServiceCategoriesI {
     name_ru: string;
     name_en: string;
     type: CategoryType;
+    icon: string;
     created_at?: Date;
     updated_at?: Date;
 }

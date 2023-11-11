@@ -8,9 +8,9 @@ export async function up(knex: Knex): Promise<void> {
             .references('id')
             .inTable('service_categories')
             .onDelete('SET NULL');
-        table.string('name_uz', 20);
-        table.string('name_ru', 20);
-        table.string('name_en', 20);
+        table.string('name_uz', 100);
+        table.string('name_ru', 100);
+        table.string('name_en', 100);
         table.text('description_uz');
         table.text('description_ru');
         table.text('description_en');

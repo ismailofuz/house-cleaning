@@ -2,9 +2,8 @@
 NODE_ENV=
 
 PORT=
-# DATABASE
 
-# local
+# DATABASE
 DB_TYPE=postgres
 DB_HOST=localhost
 DB_USER=postgres
@@ -41,10 +40,6 @@ VERIFY_SMS=
 
 BACKUP_DB_SCHEDULE=5 * * * * *
 BACKUP_FILES_SCHEDULE=5 * * * * *
-
-# Bot
-BOT_TOKEN=
-BOT_TOKEN2=
 
 # mail
 # MAIL_HOST=
