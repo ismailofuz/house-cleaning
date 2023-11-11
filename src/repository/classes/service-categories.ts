@@ -49,7 +49,17 @@ export class ServiceCategoriesRepository
             }
         }
 
-        const dbQuery = this.category.select('*');
+        const dbQuery = this.category
+            .leftJoin(
+                'services',
+                'services.category_id',
+                'service_categories.id',
+            )
+            .select(
+                'service_categories.*',
+                this.knex.raw(`COUNT(services.category_id) as servicesCount`),
+            )
+            .groupBy('service_categories.id');
 
         const totalCount = (
             await dbQuery.clone().groupBy('service_categories.id').count()
